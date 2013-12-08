@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="omeriko9ModelStoreContainer" CdmEntityContainer="git2ftpEntities">
+    <EntitySetMapping Name="git2ftp_Projects">
+      <EntityTypeMapping TypeName="omeriko9Model.git2ftp_Projects">
+        <MappingFragment StoreEntitySet="git2ftp_Projects">
+          <ScalarProperty Name="pKey" ColumnName="pKey" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FTPAddress" ColumnName="FTPAddress" />
+          <ScalarProperty Name="FTPUsername" ColumnName="FTPUsername" />
+          <ScalarProperty Name="FTPPassword" ColumnName="FTPPassword" />
+          <ScalarProperty Name="GitApiKey" ColumnName="GitApiKey" />
+          <ScalarProperty Name="GitRepositoryName" ColumnName="GitRepositoryName" />
+          <ScalarProperty Name="GitOwner" ColumnName="GitOwner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="git2ftp_Users">
+      <EntityTypeMapping TypeName="omeriko9Model.git2ftp_Users">
+        <MappingFragment StoreEntitySet="git2ftp_Users">
+          <ScalarProperty Name="pKey" ColumnName="pKey" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="git2ftp_Log">
+      <EntityTypeMapping TypeName="omeriko9Model.git2ftp_Log">
+        <MappingFragment StoreEntitySet="git2ftp_Log">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="GitHubJSON" ColumnName="GitHubJSON" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="pKey" ColumnName="pKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="omeriko9Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="git2ftp_Log">
+    <Key>
+      <PropertyRef Name="pKey" />
+    </Key>
+    <Property Name="pKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectID" Type="Int32" Nullable="false" />
+    <Property Name="GitHubJSON" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="DateTime" Type="DateTime" Precision="3" />
+    <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="git2ftp_Projects" Relationship="Self.ProjectLogToProject" FromRole="git2ftp_Log" ToRole="git2ftp_Projects" />
+  </EntityType>
+  <EntityType Name="git2ftp_Projects">
+    <Key>
+      <PropertyRef Name="pKey" />
+    </Key>
+    <Property Name="pKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="FTPAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FTPUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FTPPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GitApiKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GitRepositoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GitOwner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="git2ftp_Log" Relationship="Self.ProjectLogToProject" FromRole="git2ftp_Projects" ToRole="git2ftp_Log" />
+    <NavigationProperty Name="git2ftp_Users" Relationship="Self.UserToProjects" FromRole="git2ftp_Projects" ToRole="git2ftp_Users" />
+  </EntityType>
+  <EntityType Name="git2ftp_Users">
+    <Key>
+      <PropertyRef Name="pKey" />
+    </Key>
+    <Property Name="pKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="git2ftp_Projects" Relationship="Self.UserToProjects" FromRole="git2ftp_Users" ToRole="git2ftp_Projects" />
+  </EntityType>
+  <Association Name="ProjectLogToProject">
+    <End Role="git2ftp_Projects" Type="Self.git2ftp_Projects" Multiplicity="1" />
+    <End Role="git2ftp_Log" Type="Self.git2ftp_Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="git2ftp_Projects">
+        <PropertyRef Name="pKey" />
+      </Principal>
+      <Dependent Role="git2ftp_Log">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserToProjects">
+    <End Role="git2ftp_Users" Type="Self.git2ftp_Users" Multiplicity="1" />
+    <End Role="git2ftp_Projects" Type="Self.git2ftp_Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="git2ftp_Users">
+        <PropertyRef Name="pKey" />
+      </Principal>
+      <Dependent Role="git2ftp_Projects">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="omeriko9Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="git2ftp_Log" EntityType="Self.git2ftp_Log" />
+    <EntitySet Name="git2ftp_Projects" EntityType="Self.git2ftp_Projects" />
+    <EntitySet Name="git2ftp_Users" EntityType="Self.git2ftp_Users" />
+    <AssociationSet Name="ProjectLogToProject" Association="Self.ProjectLogToProject">
+      <End Role="git2ftp_Projects" EntitySet="git2ftp_Projects" />
+      <End Role="git2ftp_Log" EntitySet="git2ftp_Log" />
+    </AssociationSet>
+    <AssociationSet Name="UserToProjects" Association="Self.UserToProjects">
+      <End Role="git2ftp_Users" EntitySet="git2ftp_Users" />
+      <End Role="git2ftp_Projects" EntitySet="git2ftp_Projects" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="omeriko9Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="git2ftp_Log">
+          <Key>
+            <PropertyRef Name="pKey" />
+          </Key>
+          <Property Name="pKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="GitHubJSON" Type="nvarchar" MaxLength="4000" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="State" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="git2ftp_Projects">
+          <Key>
+            <PropertyRef Name="pKey" />
+          </Key>
+          <Property Name="pKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FTPAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FTPUsername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FTPPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GitApiKey" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GitRepositoryName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GitOwner" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="git2ftp_Users">
+          <Key>
+            <PropertyRef Name="pKey" />
+          </Key>
+          <Property Name="pKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="ProjectLogToProject">
+          <End Role="git2ftp_Projects" Type="Self.git2ftp_Projects" Multiplicity="1" />
+          <End Role="git2ftp_Log" Type="Self.git2ftp_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="git2ftp_Projects">
+              <PropertyRef Name="pKey" />
+            </Principal>
+            <Dependent Role="git2ftp_Log">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserToProjects">
+          <End Role="git2ftp_Users" Type="Self.git2ftp_Users" Multiplicity="1" />
+          <End Role="git2ftp_Projects" Type="Self.git2ftp_Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="git2ftp_Users">
+              <PropertyRef Name="pKey" />
+            </Principal>
+            <Dependent Role="git2ftp_Projects">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="omeriko9ModelStoreContainer">
+          <EntitySet Name="git2ftp_Log" EntityType="Self.git2ftp_Log" Schema="dbo" Table="git2ftp.Log" store:Type="Tables" />
+          <EntitySet Name="git2ftp_Projects" EntityType="Self.git2ftp_Projects" Schema="dbo" Table="git2ftp.Projects" store:Type="Tables" />
+          <EntitySet Name="git2ftp_Users" EntityType="Self.git2ftp_Users" Schema="dbo" Table="git2ftp.Users" store:Type="Tables" />
+          <AssociationSet Name="ProjectLogToProject" Association="Self.ProjectLogToProject">
+            <End Role="git2ftp_Projects" EntitySet="git2ftp_Projects" />
+            <End Role="git2ftp_Log" EntitySet="git2ftp_Log" />
+          </AssociationSet>
+          <AssociationSet Name="UserToProjects" Association="Self.UserToProjects">
+            <End Role="git2ftp_Users" EntitySet="git2ftp_Users" />
+            <End Role="git2ftp_Projects" EntitySet="git2ftp_Projects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="omeriko9Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="git2ftp_Log">
+          <Key>
+            <PropertyRef Name="pKey" />
+          </Key>
+          <Property Name="pKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="Int32" Nullable="false" />
+          <Property Name="GitHubJSON" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="git2ftp_Projects" Relationship="Self.ProjectLogToProject" FromRole="git2ftp_Log" ToRole="git2ftp_Projects" />
+        </EntityType>
+        <EntityType Name="git2ftp_Projects">
+          <Key>
+            <PropertyRef Name="pKey" />
+          </Key>
+          <Property Name="pKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FTPAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FTPUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FTPPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GitApiKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GitRepositoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GitOwner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="git2ftp_Log" Relationship="Self.ProjectLogToProject" FromRole="git2ftp_Projects" ToRole="git2ftp_Log" />
+          <NavigationProperty Name="git2ftp_Users" Relationship="Self.UserToProjects" FromRole="git2ftp_Projects" ToRole="git2ftp_Users" />
+        </EntityType>
+        <EntityType Name="git2ftp_Users">
+          <Key>
+            <PropertyRef Name="pKey" />
+          </Key>
+          <Property Name="pKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="git2ftp_Projects" Relationship="Self.UserToProjects" FromRole="git2ftp_Users" ToRole="git2ftp_Projects" />
+        </EntityType>
+        <Association Name="ProjectLogToProject">
+          <End Role="git2ftp_Projects" Type="Self.git2ftp_Projects" Multiplicity="1" />
+          <End Role="git2ftp_Log" Type="Self.git2ftp_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="git2ftp_Projects">
+              <PropertyRef Name="pKey" />
+            </Principal>
+            <Dependent Role="git2ftp_Log">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserToProjects">
+          <End Role="git2ftp_Users" Type="Self.git2ftp_Users" Multiplicity="1" />
+          <End Role="git2ftp_Projects" Type="Self.git2ftp_Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="git2ftp_Users">
+              <PropertyRef Name="pKey" />
+            </Principal>
+            <Dependent Role="git2ftp_Projects">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="omeriko9Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="git2ftp_Log" EntityType="Self.git2ftp_Log" />
+          <EntitySet Name="git2ftp_Projects" EntityType="Self.git2ftp_Projects" />
+          <EntitySet Name="git2ftp_Users" EntityType="Self.git2ftp_Users" />
+          <AssociationSet Name="ProjectLogToProject" Association="Self.ProjectLogToProject">
+            <End Role="git2ftp_Projects" EntitySet="git2ftp_Projects" />
+            <End Role="git2ftp_Log" EntitySet="git2ftp_Log" />
+          </AssociationSet>
+          <AssociationSet Name="UserToProjects" Association="Self.UserToProjects">
+            <End Role="git2ftp_Users" EntitySet="git2ftp_Users" />
+            <End Role="git2ftp_Projects" EntitySet="git2ftp_Projects" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="omeriko9ModelStoreContainer" CdmEntityContainer="omeriko9Entities">
+          <EntitySetMapping Name="git2ftp_Log">
+            <EntityTypeMapping TypeName="omeriko9Model.git2ftp_Log">
+              <MappingFragment StoreEntitySet="git2ftp_Log">
+                <ScalarProperty Name="pKey" ColumnName="pKey" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="GitHubJSON" ColumnName="GitHubJSON" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="git2ftp_Projects">
+            <EntityTypeMapping TypeName="omeriko9Model.git2ftp_Projects">
+              <MappingFragment StoreEntitySet="git2ftp_Projects">
+                <ScalarProperty Name="pKey" ColumnName="pKey" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FTPAddress" ColumnName="FTPAddress" />
+                <ScalarProperty Name="FTPUsername" ColumnName="FTPUsername" />
+                <ScalarProperty Name="FTPPassword" ColumnName="FTPPassword" />
+                <ScalarProperty Name="GitApiKey" ColumnName="GitApiKey" />
+                <ScalarProperty Name="GitRepositoryName" ColumnName="GitRepositoryName" />
+                <ScalarProperty Name="GitOwner" ColumnName="GitOwner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="git2ftp_Users">
+            <EntityTypeMapping TypeName="omeriko9Model.git2ftp_Users">
+              <MappingFragment StoreEntitySet="git2ftp_Users">
+                <ScalarProperty Name="pKey" ColumnName="pKey" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
