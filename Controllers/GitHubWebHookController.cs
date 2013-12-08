@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using git2ftp_mvc5.App_Code.DAL;
+using git2ftp_mvc5.Models;
 using git2ftp_mvc5.BLL;
 using jobj = System.Collections.Generic.Dictionary<string, object>;
 
@@ -21,18 +21,16 @@ namespace git2ftp_mvc5.Controllers
         }
 
         [HttpPost]
-        public ContentResult WebhookEvent(string texttodisplay)
+        public ContentResult GitHubPost(string payload)
         {
-            string gitResponse = "";
-
-            if (!String.IsNullOrEmpty(gitResponse = texttodisplay)) // we have a winner
+            if (!String.IsNullOrEmpty(payload)) // we have a winner
             {
-                var decoded = Server.UrlDecode(gitResponse);
+                var decoded = Server.UrlDecode(payload);
                 System.Web.HttpContext.Current.Application["gitResponse"] = decoded;
                 Deploy(decoded);
             }
 
-            return new ContentResult { Content = texttodisplay };
+            return new ContentResult { Content = "ok" };
         }
 
         private void Deploy(string gitResponse)

@@ -155,31 +155,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\GitHubWebHookHandler.cs" />
-    <Compile Include="App_Code\BLL\FTPFacade.cs" />
-    <Compile Include="App_Code\BLL\GitHubFacade.cs" />
-    <Compile Include="App_Code\DAL\git2ftp.Context.cs">
+    <Compile Include="Controllers\git2ftpProjectsController.cs" />
+    <Compile Include="Models\FTPFacade.cs" />
+    <Content Include="Models\git2ftp_ProjectsExtend.cs" />
+    <Compile Include="Models\GitHubFacade.cs" />
+    <Compile Include="Models\git2ftp.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>git2ftp.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Code\DAL\git2ftp.cs">
+    <Compile Include="Models\git2ftp.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>git2ftp.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Code\DAL\git2ftp.Designer.cs">
+    <Compile Include="Models\git2ftp.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>git2ftp.edmx</DependentUpon>
     </Compile>
-    <Compile Include="App_Code\DAL\git2ftp_Log.cs">
+    <Compile Include="Models\git2ftp_Log.cs">
       <DependentUpon>git2ftp.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Code\DAL\git2ftp_Projects.cs">
+    <Compile Include="Models\git2ftp_Projects.cs">
       <DependentUpon>git2ftp.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Code\DAL\git2ftp_Users.cs">
+    <Compile Include="Models\git2ftp_Users.cs">
       <DependentUpon>git2ftp.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -207,19 +208,19 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="App_Code\DAL\git2ftp.edmx">
+    <EntityDeploy Include="Models\git2ftp.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>git2ftp.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="App_Code\DAL\git2ftp.Context.tt">
+    <Content Include="Models\git2ftp.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>git2ftp.edmx</DependentUpon>
       <LastGenOutput>git2ftp.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="App_Code\DAL\git2ftp.edmx.diagram">
+    <Content Include="Models\git2ftp.edmx.diagram">
       <DependentUpon>git2ftp.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Code\DAL\git2ftp.tt">
+    <Content Include="Models\git2ftp.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>git2ftp.edmx</DependentUpon>
       <LastGenOutput>git2ftp.cs</LastGenOutput>
@@ -261,6 +262,11 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\git2ftpProjects\Create.cshtml" />
+    <Content Include="Views\git2ftpProjects\Delete.cshtml" />
+    <Content Include="Views\git2ftpProjects\Details.cshtml" />
+    <Content Include="Views\git2ftpProjects\Edit.cshtml" />
+    <Content Include="Views\git2ftpProjects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -277,7 +283,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="I:\GitHub\octokit.net\Octokit\Octokit.csproj">
+    <ProjectReference Include="..\octokit-my\Octokit.csproj">
       <Project>{08dd4305-7787-4823-a53f-4d0f725a07f3}</Project>
       <Name>Octokit</Name>
     </ProjectReference>

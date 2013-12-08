@@ -7,7 +7,7 @@ public class GitHubWebHookHandler : IHttpHandler
     public void ProcessRequest(HttpContext context)
     {
         var p = new Uri(HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, ""));
-        System.Net.WebRequest wr = System.Net.WebRequest.Create(new Uri(p, "Write.aspx"));
+        System.Net.WebRequest wr = System.Net.WebRequest.Create(new Uri(p, "GitHubWebHook/WebhookEvent"));
         wr.Headers.Add("texttodisplay", new System.IO.StreamReader(context.Request.InputStream).ReadToEnd());
         wr.Method = "POST";
         wr.ContentLength = 0;
