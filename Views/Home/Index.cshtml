@@ -9,15 +9,23 @@
 </div>
 
 <p class="btn btn-default" id="submit-name">Test POST</p>
+<p>
+    @{ if (System.Web.HttpContext.Current.Application["gitResponse"] != null)
+       { 
+           Response.Write(System.Web.HttpContext.Current.Application["gitResponse"].ToString());
+       }
+    }
+
+</p>
 <script type="text/javascript">
-    console.debug('jhi');
+    console.debug('@Url.Action("WebhookEvent", "GitHubWebHook")');
     // jQuery's doc ready handler
     $(function () {
-       
+
         $("#submit-name").click(function () {
 
             var nameEntered = "omer";
-
+       
             $.post(
                 '@Url.Action("WebhookEvent", "GitHubWebHook")',
                 { texttodisplay: nameEntered },
