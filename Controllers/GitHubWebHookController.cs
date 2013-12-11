@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using git2ftp_mvc5.Models;
-using git2ftp_mvc5.BLL;
 using jobj = System.Collections.Generic.Dictionary<string, object>;
 
 namespace git2ftp_mvc5.Controllers

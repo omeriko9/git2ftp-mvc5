@@ -1,0 +1,70 @@
+﻿@model IEnumerable<git2ftp_mvc5.Models.git2ftp_Projects>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            git2ftp Username
+        </th>
+        <th>
+           FTP Url
+        </th>
+        <th>
+            FTP Username
+        </th>
+        <th>
+            FTP Password
+        </th>
+        <th>
+            GitHub API Key
+        </th>
+        <th>
+            GitHub Repository 
+        </th>
+        <th>
+            GitHub Username
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.git2ftp_Users.Username)
+        <td>
+            @Html.DisplayFor(modelItem => item.FTPAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FTPUsername)
+        </td>
+        <td>
+            *****
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GitApiKey)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GitRepositoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GitOwner)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pKey }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pKey }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pKey })
+        </td>
+    </tr>
+}
+
+</table>

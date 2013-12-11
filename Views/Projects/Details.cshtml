@@ -1,0 +1,74 @@
+﻿@model git2ftp_mvc5.Models.git2ftp_Projects
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>git2ftp_Projects</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FTPAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTPAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FTPUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTPUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FTPPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTPPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GitApiKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GitApiKey)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GitRepositoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GitRepositoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GitOwner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GitOwner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.git2ftp_Users.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.git2ftp_Users.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.pKey }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

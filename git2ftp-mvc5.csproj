@@ -21,6 +21,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +42,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -108,20 +122,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>C:\Users\omer\Documents\Visual Studio 2013\Projects\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>C:\Users\omer\Documents\Visual Studio 2013\Projects\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>C:\Users\omer\Documents\Visual Studio 2013\Projects\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin">
       <HintPath>C:\Users\omer\Documents\Visual Studio 2013\Projects\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>C:\Users\omer\Documents\Visual Studio 2013\Projects\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>C:\Users\omer\Documents\Visual Studio 2013\Projects\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -155,34 +160,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\git2ftpProjectsController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Models\git2ftpModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>git2ftpModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\git2ftpModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>git2ftpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\git2ftpModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>git2ftpModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\git2ftp_Log.cs">
+      <DependentUpon>git2ftpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\git2ftp_Projects.cs">
+      <DependentUpon>git2ftpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\git2ftp_Users.cs">
+      <DependentUpon>git2ftpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FTPFacade.cs" />
     <Content Include="Models\git2ftp_ProjectsExtend.cs" />
     <Compile Include="Models\GitHubFacade.cs" />
-    <Compile Include="Models\git2ftp.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>git2ftp.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\git2ftp.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>git2ftp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\git2ftp.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>git2ftp.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\git2ftp_Log.cs">
-      <DependentUpon>git2ftp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\git2ftp_Projects.cs">
-      <DependentUpon>git2ftp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\git2ftp_Users.cs">
-      <DependentUpon>git2ftp.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -208,22 +213,22 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\git2ftp.edmx">
+    <EntityDeploy Include="Models\git2ftpModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>git2ftp.Designer.cs</LastGenOutput>
+      <LastGenOutput>git2ftpModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\git2ftp.Context.tt">
+    <Content Include="Models\git2ftpModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>git2ftp.edmx</DependentUpon>
-      <LastGenOutput>git2ftp.Context.cs</LastGenOutput>
+      <DependentUpon>git2ftpModel.edmx</DependentUpon>
+      <LastGenOutput>git2ftpModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\git2ftp.edmx.diagram">
-      <DependentUpon>git2ftp.edmx</DependentUpon>
+    <Content Include="Models\git2ftpModel.edmx.diagram">
+      <DependentUpon>git2ftpModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\git2ftp.tt">
+    <Content Include="Models\git2ftpModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>git2ftp.edmx</DependentUpon>
-      <LastGenOutput>git2ftp.cs</LastGenOutput>
+      <DependentUpon>git2ftpModel.edmx</DependentUpon>
+      <LastGenOutput>git2ftpModel.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -262,15 +267,14 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\git2ftpProjects\Create.cshtml" />
-    <Content Include="Views\git2ftpProjects\Delete.cshtml" />
-    <Content Include="Views\git2ftpProjects\Details.cshtml" />
-    <Content Include="Views\git2ftpProjects\Edit.cshtml" />
-    <Content Include="Views\git2ftpProjects\Index.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\GitHubWebHook\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -316,6 +320,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
