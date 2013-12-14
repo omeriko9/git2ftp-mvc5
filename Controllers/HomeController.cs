@@ -8,6 +8,11 @@ namespace git2ftp_mvc5.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult MakeException()
+        {
+            throw new Exception("You asked for it!");
+        }
+
         public ActionResult Index()
         {
             return View();

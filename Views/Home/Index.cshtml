@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "git2ftp - Home";
 }
 
 <div class="jumbotron">
@@ -30,7 +30,7 @@
             var nameEntered = "omer";
        
             $.post(
-                '@Url.Action("WebhookEvent", "GitHubWebHook")',
+                '@Url.Action("GitHubPost", "GitHubWebHook")',
                 { texttodisplay: nameEntered },
                 handleSuccess
             );

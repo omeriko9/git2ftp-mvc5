@@ -22,11 +22,14 @@ namespace git2ftp_mvc5.Controllers
         [HttpPost]
         public ContentResult GitHubPost(string payload)
         {
+            var tt = @"{""ref"":""refs/heads/master"",""after"":""d0fb0edd0cf831e06ca0661fbc8ced59fa9124a8"",""before"":""4c7cd396f97c90becfe9bacf640c17c09bacda2e"",""created"":false,""deleted"":false,""forced"":false,""compare"":""https://github.com/omeriko9/zohargallery/compare/4c7cd396f97c...d0fb0edd0cf8"",""commits"":[{""id"":""5753d52c794ef2d7cb7322c509aa81f39a3db5e4"",""distinct"":true,""message"":""remove test"",""timestamp"":""2013-12-07T09:26:22-08:00"",""url"":""https://github.com/omeriko9/zohargallery/commit/5753d52c794ef2d7cb7322c509aa81f39a3db5e4"",""author"":{""name"":""omeriko9"",""email"":""omeriko9@gmail.com"",""username"":""omeriko9""},""committer"":{""name"":""omeriko9"",""email"":""omeriko9@gmail.com"",""username"":""omeriko9""},""added"":[],""removed"":[""test.txt""],""modified"":[]},{""id"":""46b3e10eb56b189b9f9ab3d7073e900abe3d6f50"",""distinct"":true,""message"":""removed caching from web.config since it screws up the website"",""timestamp"":""2013-12-07T10:49:21-08:00"",""url"":""https://github.com/omeriko9/zohargallery/commit/46b3e10eb56b189b9f9ab3d7073e900abe3d6f50"",""author"":{""name"":""omeriko9"",""email"":""omeriko9@gmail.com"",""username"":""omeriko9""},""committer"":{""name"":""omeriko9"",""email"":""omeriko9@gmail.com"",""username"":""omeriko9""},""added"":[],""removed"":[],""modified"":[""Web.config""]},{""id"":""d0fb0edd0cf831e06ca0661fbc8ced59fa9124a8"",""distinct"":true,""message"":""Create robots.txt"",""timestamp"":""2013-12-09T06:11:15-08:00"",""url"":""https://github.com/omeriko9/zohargallery/commit/d0fb0edd0cf831e06ca0661fbc8ced59fa9124a8"",""author"":{""name"":""Omer Agmon"",""email"":""omeriko9@gmail.com"",""username"":""omeriko9""},""committer"":{""name"":""Omer Agmon"",""email"":""omeriko9@gmail.com"",""username"":""omeriko9""},""added"":[""robots.txt""],""removed"":[],""modified"":[]}],""head_commit"":{""id"":""d0fb0edd0cf831e06ca0661fbc8ced59fa9124a8"",""distinct"":true,""message"":""Create robots.txt"",""timestamp"":""2013-12-09T06:11:15-08:00"",""url"":""https://github.com/omeriko9/zohargallery/commit/d0fb0edd0cf831e06ca0661fbc8ced59fa9124a8"",""author"":{""name"":""Omer Agmon"",""email"":""omeriko9@gmail.com"",""username"":""omeriko9""},""committer"":{""name"":""Omer Agmon"",""email"":""omeriko9@gmail.com"",""username"":""omeriko9""},""added"":[""robots.txt""],""removed"":[],""modified"":[]},""repository"":{""id"":14746532,""name"":""zohargallery"",""url"":""https://github.com/omeriko9/zohargallery"",""description"":"""",""watchers"":0,""stargazers"":0,""forks"":1,""fork"":false,""size"":44938,""owner"":{""name"":""omeriko9"",""email"":""omeriko9@gmail.com""},""private"":false,""open_issues"":0,""has_issues"":true,""has_downloads"":true,""has_wiki"":true,""language"":""JavaScript"",""created_at"":1385555639,""pushed_at"":1386598275,""master_branch"":""master""},""pusher"":{""name"":""none""}}";
+            //payload = tt;
             if (!String.IsNullOrEmpty(payload)) // we have a winner
             {
                 var decoded = Server.UrlDecode(payload);
                 System.Web.HttpContext.Current.Application["gitResponse"] = decoded;
-                Deploy(decoded);
+                if (decoded != "omer")
+                    Deploy(decoded);
             }
 
             return new ContentResult { Content = "ok" };
@@ -127,7 +130,7 @@ namespace git2ftp_mvc5.Controllers
             });
 
             log("Completed Successfully");
-            
+
         }
 
         public ContentResult LastOne()
